@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
   { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" }
+  { href: "/contact", label: "Pre-order" }
 ];
 
 function NavbarContent() {

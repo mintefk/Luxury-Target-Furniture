@@ -1,10 +1,10 @@
-export type Category = "sofas" | "beds" | "tables" | "chairs" | "cabinets";
+export type Category = "Kichen-Solutions" | "Closets" | "Doors" ;
 
 export type Product = {
   id: string;
   name: string;
   slug: string;
-  price: number;
+  
   description: string;
   category: Category;
   featured?: boolean;
@@ -21,10 +21,9 @@ export const products: Product[] = [
     id: "sofa-aurora-linen",
     name: "Aurora Linen Sofa",
     slug: "aurora-linen-sofa",
-    price: 4890,
     description:
       "A three-seat silhouette upholstered in Italian linen with feather-down cushions and hand-finished oak legs.",
-    category: "sofas",
+    category: "Kichen-Solutions",
     featured: true,
     badge: "New arrival",
     images: ["/images/sofa-1.jpg", "/images/sofa-1b.jpg"],
@@ -37,10 +36,10 @@ export const products: Product[] = [
     id: "bed-serene-oak",
     name: "Serene Oak Bed",
     slug: "serene-oak-bed",
-    price: 6290,
+    
     description:
       "A low-profile platform bed in smoked European oak with a subtly curved headboard and integrated night ledge.",
-    category: "beds",
+    category: "Closets",
     featured: true,
     badge: "Bestseller",
     images: ["/images/bed-1.jpg", "/images/bed-1b.jpg"],
@@ -53,10 +52,10 @@ export const products: Product[] = [
     id: "table-horizon-marble",
     name: "Horizon Marble Table",
     slug: "horizon-marble-table",
-    price: 4190,
+    
     description:
       "An oval dining table combining honed Calacatta marble with a sculpted walnut base for a quietly dramatic centerpiece.",
-    category: "tables",
+    category: "Doors",
     featured: true,
     images: ["/images/table-1.jpg", "/images/table-1b.jpg"],
     dimensions: "210 x 100 x 74 cm",
@@ -68,10 +67,10 @@ export const products: Product[] = [
     id: "chair-luna-leather",
     name: "Luna Leather Chair",
     slug: "luna-leather-chair",
-    price: 1890,
+   
     description:
       "An enveloping leather lounge chair with a floating seat and brushed brass accents.",
-    category: "chairs",
+    category: "Kichen-Solutions",
     featured: true,
     images: ["/images/chair-1.jpg", "/images/chair-1b.jpg"],
     dimensions: "78 x 80 x 76 cm",
@@ -80,13 +79,13 @@ export const products: Product[] = [
     popularity: 92
   },
   {
-    id: "cabinet-vista-oak",
+    id: "cabinet-vista-oak-1",
     name: "Vista Oak Cabinet",
     slug: "vista-oak-cabinet",
-    price: 3290,
+    
     description:
       "A slim cabinet with fluted oak doors, soft-close hardware, and adjustable interior shelving.",
-    category: "cabinets",
+    category: "Closets",
     images: ["/images/cabinet-1.jpg"],
     dimensions: "110 x 40 x 190 cm",
     materials: "Fluted oak veneer, solid oak legs, brass hardware",
@@ -94,13 +93,13 @@ export const products: Product[] = [
     popularity: 88
   },
   {
-    id: "cabinet-vista-oak",
+    id: "cabinet-vista-oak-2",
     name: "Vista Oak Cabinet",
-    slug: "vista-oak-cabinet",
-    price: 3290,
+    slug: "vista-oak-cabinet-2",
+   
     description:
       "A slim cabinet with fluted oak doors, soft-close hardware, and adjustable interior shelving.",
-    category: "cabinets",
+    category: "Doors",
     images: ["/images/cabinet-2.jpg"],
     dimensions: "110 x 40 x 190 cm",
     materials: "Fluted oak veneer, solid oak legs, brass hardware",
@@ -111,10 +110,10 @@ export const products: Product[] = [
     id: "sofa-haven-boucle",
     name: "Haven Bouclé Sofa",
     slug: "haven-boucle-sofa",
-    price: 5390,
+   
     description:
       "A deep, low-profile modular sofa wrapped in textured bouclé, designed for expansive living spaces.",
-    category: "sofas",
+    category: "Kichen-Solutions",
     images: ["/images/sofa-2.jpg"],
     dimensions: "260 x 110 x 72 cm",
     materials: "Bouclé upholstery, kiln-dried hardwood frame",
@@ -125,10 +124,10 @@ export const products: Product[] = [
     id: "table-atlas-wood",
     name: "Atlas Dining Table",
     slug: "atlas-dining-table",
-    price: 3890,
+    
     description:
       "A monolithic dining table with a subtly tapered edge and book-matched walnut grain.",
-    category: "tables",
+    category: "Doors",
     images: ["/images/table-2.jpg"],
     dimensions: "200 x 95 x 75 cm",
     materials: "American walnut with clear matte lacquer",
@@ -139,29 +138,23 @@ export const products: Product[] = [
     id: "chair-orbit-fabric",
     name: "Orbit Dining Chair",
     slug: "orbit-dining-chair",
-    price: 890,
+    
     description:
       "An upholstered dining chair with a curved backrest and slender oak legs for effortless comfort.",
-    category: "chairs",
+    category: "Doors",
     images: ["/images/chair-2.jpg"],
     dimensions: "52 x 58 x 82 cm",
     materials: "Performance fabric, solid oak",
     inStock: true,
     popularity: 84
   }
-
-  
 ];
 
-
-
-
 export const categories: { id: Category; label: string }[] = [
-  { id: "sofas", label: "Sofas" },
-  { id: "beds", label: "Beds" },
-  { id: "tables", label: "Tables" },
-  { id: "chairs", label: "Chairs" },
-  { id: "cabinets", label: "Cabinets" }
+  { id: "Kichen-Solutions", label: "Kichen-Solutions" },
+  { id: "Closets", label: "Closets" },
+  { id: "Doors", label: "Droors" },
+  
 ];
 
 export function getProductBySlug(slug: string) {
@@ -173,4 +166,3 @@ export function getRelatedProducts(product: Product, limit = 4) {
     .filter((p) => p.id !== product.id && p.category === product.category)
     .slice(0, limit);
 }
-

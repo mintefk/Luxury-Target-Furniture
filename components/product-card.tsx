@@ -45,9 +45,7 @@ export function ProductCard({ product }: Props) {
             {product.description}
           </p>
           <div className="mt-2 flex items-center justify-between">
-            <p className="text-sm font-medium">
-              ${product.price.toLocaleString()}
-            </p>
+            
             <span className="text-[0.65rem] uppercase tracking-[0.22em] text-muted-foreground group-hover:text-foreground">
               View details
             </span>
@@ -57,4 +55,6 @@ export function ProductCard({ product }: Props) {
     </motion.article>
   );
 }
+
+
 
