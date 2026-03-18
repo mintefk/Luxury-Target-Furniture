@@ -58,10 +58,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const clearCart = () => setItems([]);
 
   const { subtotal, count } = useMemo(() => {
-    const subtotalValue = items.reduce(
-      (sum, item) => sum + item.product.price * item.quantity,
-      0
-    );
+    const subtotalValue = 0;
     const countValue = items.reduce((sum, item) => sum + item.quantity, 0);
     return { subtotal: subtotalValue, count: countValue };
   }, [items]);
