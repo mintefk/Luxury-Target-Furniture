@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ShoppingBag, Menu, Search, X } from "lucide-react";
@@ -41,41 +42,70 @@ function NavbarContent() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-[rgba(247,243,238,0.9)] backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-border/60 bg-[rgba(247,243,238,0.75)] backdrop-blur-xl">
       <div className="luxury-container flex h-20 items-center justify-between gap-4">
 
         {/* Logo */}
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="h-8 w-8 rounded-full bg-foreground/90" />
-            <div className="flex flex-col leading-tight">
-              <span className="text-xs tracking-[0.3em] uppercase text-muted-foreground">
-                Target
-              </span>
-              <span className="text-sm font-semibold tracking-[0.25em] uppercase">
-                Furniture
-              </span>
-            </div>
-          </Link>
+        <motion.div
+  initial={{ opacity: 0, y: -10, scale: 0.95 }}
+  animate={{ opacity: 1, y: 0, scale: 1 }}
+  transition={{ duration: 0.5, ease: "easeOut" }}
+>
+  <Link href="/" className="flex items-center gap-3 group">
 
-          {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-8 text-xs tracking-[0.25em] uppercase">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "transition-colors hover:text-foreground/80",
-                  pathname === link.href
-                    ? "text-foreground"
-                    : "text-muted-foreground"
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
+    {/* Glass badge */}
+    <div className="relative flex items-center justify-center 
+      
+      
+      h-14 w-14 sm:h-20 sm:w-20
+    rounded-full overflow-hidden 
+    bg-white/30 backdrop-blur-md border border-white/40 shadow-md
+    group
+
+      
+    ">
+     
+      <div className="absolute inset-0 rounded-full bg-white/20 blur-md opacity-0 group-hover:opacity-100 transition duration-300" />
+
+      <Image
+        src="/images/logoo.jpg"
+        alt="Target Furniture Logo"
+        fill
+        className="object-contain p-0"
+        priority
+      />
+    </div>
+
+    {/* Text */}
+    <div className="flex flex-col leading-tight">
+      <span className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-muted-foreground">
+        Target
+      </span>
+      <span className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase">
+        Furniture
+      </span>
+    </div>
+
+  </Link>
+</motion.div>
+
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-8 text-xs tracking-[0.25em] uppercase">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={cn(
+                "transition-colors hover:text-foreground/80",
+                pathname === link.href
+                  ? "text-foreground"
+                  : "text-muted-foreground"
+              )}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </nav>
 
         {/* Desktop actions */}
         <div className="hidden items-center gap-4 md:flex">

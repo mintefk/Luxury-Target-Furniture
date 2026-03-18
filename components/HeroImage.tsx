@@ -5,8 +5,9 @@ import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 
 const images = [
-  "/images/hero-desktop.jpg",
   "/images/hero-desktop-2.jpg",
+  "/images/hero-desktop.jpg",
+ 
 ];
 
 export default function HeroImage() {

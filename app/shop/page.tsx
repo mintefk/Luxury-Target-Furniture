@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
+import { Suspense, useMemo, useCallback, useTransition } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductGrid } from "@/components/product-grid";
 import { products, categories, type Category } from "@/data/products";
@@ -11,110 +11,113 @@ const sortOptions = [
   { id: "price-asc", label: "Price: Low to High" },
   { id: "price-desc", label: "Price: High to Low" },
   { id: "popularity", label: "Most Popular" }
-];
+] as const;
+
+type SortType = (typeof sortOptions)[number]["id"];
 
 function ShopContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
   const activeCategory = searchParams.get("category") as Category | null;
-  const query = searchParams.get("q")?.toLowerCase() ?? "";
-  const sort = searchParams.get("sort") ?? "featured";
+  const query = (searchParams.get("q") ?? "").toLowerCase();
+  const sort = (searchParams.get("sort") as SortType) ?? "featured";
 
-  const setParam = (key: string, value: string | null) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (value) params.set(key, value);
-    else params.delete(key);
-    router.push(`/shop?${params.toString()}`);
-  };
+  const updateParams = useCallback(
+    (updates: Record<string, string | null>) => {
+      const params = new URLSearchParams(searchParams.toString());
 
-  const filtered = useMemo(() => {
-    let list = products;
+      Object.entries(updates).forEach(([key, value]) => {
+        if (!value) params.delete(key);
+        else params.set(key, value);
+      });
 
+      startTransition(() => {
+        router.push(`/shop?${params.toString()}`);
+      });
+    },
+    [router, searchParams]
+  );
+
+  const filteredProducts = useMemo(() => {
+    let list = [...products];
+
+    // Filter by category
     if (activeCategory) {
       list = list.filter((p) => p.category === activeCategory);
     }
 
+    // Search filter
     if (query) {
-      list = list.filter(
-        (p) =>
-          p.name.toLowerCase().includes(query) ||
-          p.description.toLowerCase().includes(query)
-      );
+      list = list.filter((p) => {
+        const text = `${p.name} ${p.description}`.toLowerCase();
+        return text.includes(query);
+      });
     }
 
-    switch (sort) {
-      case "price-asc":
-        list = [...list].sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        list = [...list].sort((a, b) => b.price - a.price);
-        break;
-      case "popularity":
-        list = [...list].sort((a, b) => b.popularity - a.popularity);
-        break;
-      default:
-        list = [...list].sort((a, b) => Number(b.featured) - Number(a.featured));
-    }
+    // Sorting
+    const sortMap: Record<SortType, (a: any, b: any) => number> = {
+      "price-asc": (a, b) => a.price - b.price,
+      "price-desc": (a, b) => b.price - a.price,
+      popularity: (a, b) => b.popularity - a.popularity,
+      featured: (a, b) => Number(b.featured) - Number(a.featured)
+    };
 
-    return list;
+    return list.sort(sortMap[sort]);
   }, [activeCategory, query, sort]);
 
   return (
-    <div className="luxury-container space-y-8 py-10">
+    <div className="luxury-container space-y-10 py-10">
       <BackButton />
       <div className="h-px w-full bg-border/70" />
 
-      <header className="space-y-3">
+      {/* Header */}
+      <header className="space-y-4">
         <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
           Collection
         </p>
-        <h1 className="text-2xl font-medium tracking-tight">
-          Furniture for every room.
+        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
+          Furniture for every room
         </h1>
-        <p className="max-w-xl text-sm text-muted-foreground">
-          Explore sofas, beds, tables, and more—designed to layer seamlessly into
-          existing spaces or define new ones.
+        <p className="max-w-2xl text-sm text-muted-foreground leading-relaxed">
+          Explore sofas, beds, tables, and more—crafted to elevate your space with
+          timeless design and modern comfort.
         </p>
       </header>
 
-      <section className="flex flex-col gap-4 rounded-3xl border border-border bg-card/70 p-4 md:flex-row md:items-center md:justify-between">
+      {/* Filters */}
+      <section className="flex flex-col gap-4 rounded-3xl border border-border bg-card/60 backdrop-blur p-5 md:flex-row md:items-center md:justify-between">
+        {/* Categories */}
         <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setParam("category", null)}
-            className={`rounded-full border px-3 py-1 text-[0.7rem] uppercase tracking-[0.24em] ${
-              !activeCategory
-                ? "border-foreground bg-foreground text-background"
-                : "border-border bg-card text-muted-foreground hover:text-foreground"
-            }`}
-          >
-            All
-          </button>
+          <CategoryButton
+            active={!activeCategory}
+            onClick={() => updateParams({ category: null })}
+            label="All"
+          />
 
           {categories.map((c) => (
-            <button
+            <CategoryButton
               key={c.id}
+              active={activeCategory === c.id}
               onClick={() =>
-                setParam("category", activeCategory === c.id ? null : c.id)
+                updateParams({
+                  category: activeCategory === c.id ? null : c.id
+                })
               }
-              className={`rounded-full border px-3 py-1 text-[0.7rem] uppercase tracking-[0.24em] ${
-                activeCategory === c.id
-                  ? "border-foreground bg-foreground text-background"
-                  : "border-border bg-card text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {c.label}
-            </button>
+              label={c.label}
+            />
           ))}
         </div>
 
+        {/* Sort */}
         <div className="flex items-center gap-3 text-xs">
           <span className="text-muted-foreground">Sort</span>
 
           <select
             value={sort}
-            onChange={(e) => setParam("sort", e.target.value)}
-            className="rounded-full border border-border bg-card px-3 py-1 text-xs outline-none"
+            onChange={(e) => updateParams({ sort: e.target.value })}
+            className="rounded-full border border-border bg-card px-4 py-1.5 text-xs outline-none hover:border-foreground transition"
           >
             {sortOptions.map((option) => (
               <option key={option.id} value={option.id}>
@@ -125,20 +128,51 @@ function ShopContent() {
         </div>
       </section>
 
-      <section className="space-y-4">
+      {/* Results */}
+      <section className="space-y-5">
         <p className="text-xs text-muted-foreground">
-          Showing {filtered.length} piece{filtered.length === 1 ? "" : "s"}
+          {isPending ? "Updating..." : `Showing ${filteredProducts.length} piece${filteredProducts.length !== 1 ? "s" : ""}`}
         </p>
 
-        <ProductGrid products={filtered} />
+        <ProductGrid products={filteredProducts} />
       </section>
     </div>
   );
 }
 
+function CategoryButton({
+  active,
+  onClick,
+  label
+}: {
+  active: boolean;
+  onClick: () => void;
+  label: string;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`rounded-full px-4 py-1.5 text-[0.7rem] uppercase tracking-[0.25em] transition-all duration-200 border
+        ${
+          active
+            ? "border-foreground bg-foreground text-background shadow-sm"
+            : "border-border bg-card text-muted-foreground hover:text-foreground hover:border-foreground"
+        }`}
+    >
+      {label}
+    </button>
+  );
+}
+
 export default function ShopPage() {
   return (
-    <Suspense fallback={<div className="p-10 text-center">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="p-10 text-center text-sm text-muted-foreground animate-pulse">
+          Loading products...
+        </div>
+      }
+    >
       <ShopContent />
     </Suspense>
   );

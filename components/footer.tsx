@@ -9,8 +9,8 @@ export function Footer() {
             Target Furniture
           </p>
           <p className="max-w-sm text-sm text-muted-foreground">
-            Quiet, enduring pieces crafted in natural materials. Designed in-house in
-            collaboration with leading European ateliers.
+          Target Furniture crafts timeless pieces in noble materials. Designed to age beautifully and live at the center
+          of everyday rituals.
           </p>
         </div>
         <div className="space-y-3 text-sm">
@@ -40,9 +40,20 @@ export function Footer() {
             Visit
           </p>
           <p className="text-muted-foreground">
-            14 Mercer Street
+          Wollo Sefer, Garad Mall 
             <br />
-            New York, NY
+            Addis Ababa,
+            <br />
+            Ethiopia <br />
+            
+               
+            <a
+    href="tel:+251946733333"
+    className="text-muted-foreground transition-all duration-300 hover:text-foreground hover:underline"
+  >
+    +251 946 733 333
+  </a>
+                 
           </p>
         </div>
       </div>

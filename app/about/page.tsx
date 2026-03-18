@@ -1,82 +1,137 @@
+"use client";
+
 import { BackButton } from "@/components/back-button";
+import { motion } from "framer-motion";
 
 export default function AboutPage() {
   return (
-    <div className="luxury-container space-y-10 py-10">
+    <div className="luxury-container space-y-12 py-10">
       <BackButton />
+
       <div className="h-px w-full bg-border/70" />
-      <header className="space-y-3">
+
+      {/* Header */}
+      <motion.header
+        className="space-y-4"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
         <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
           About
         </p>
-        <h1 className="text-2xl font-medium tracking-tight">
+
+        <h1 className="text-3xl font-medium tracking-tight leading-tight">
           A studio for quiet luxury.
         </h1>
-        <p className="max-w-xl text-sm text-muted-foreground">
-          Target Furniture is a design-led furniture house exploring the intersection
-          of architecture, art, and daily ritual.
-        </p>
-      </header>
 
+        <p className="max-w-xl text-sm text-muted-foreground leading-relaxed">
+          Target Woodworks is a design-led furniture studio exploring the
+          intersection of architecture, craftsmanship, and everyday living —
+          where form meets feeling.
+        </p>
+      </motion.header>
+
+      {/* Story + Mission */}
       <section className="grid gap-10 md:grid-cols-[1.2fr,1fr]">
-        <div className="space-y-5 text-sm leading-relaxed text-muted-foreground">
+
+        {/* Story */}
+        <motion.div
+          className="space-y-6 text-sm leading-relaxed text-muted-foreground"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
           <p>
-            Our collections are built around a few essential gestures: a softened
-            corner, a generous seat depth, the way a table edge meets the palm of your
-            hand. These details are subtle, but they&apos;re what you feel every day.
+            Our collections are shaped by a few essential gestures — a softened
+            corner, a generous seat depth, the way a surface meets the palm of
+            your hand. These are quiet details, but they define how a piece is
+            experienced every day.
           </p>
+
           <p>
-            We design in small series, allowing each piece to be refined over time
-            rather than reinvented each season. The result is a collection that feels
-            cohesive, calm, and quietly luxurious.
+            We design in small, intentional series, allowing each piece to evolve
+            and refine over time rather than follow seasonal trends. The result
+            is a collection that feels cohesive, timeless, and deeply considered.
           </p>
-        </div>
-        <div className="space-y-4 rounded-[2.2rem] border border-border bg-card/80 p-7 text-sm text-muted-foreground">
-          <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
+
+          <p>
+            At its core, our work is about creating spaces that feel calm,
+            grounded, and quietly luxurious.
+          </p>
+        </motion.div>
+
+        {/* Mission Card */}
+        <motion.div
+          className="space-y-4 rounded-[2.2rem] border border-border bg-card/80 backdrop-blur-sm p-7 text-sm text-muted-foreground"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-xs uppercase tracking-[0.3em]">
             Mission
           </p>
-          <p>
-            To create enduring furniture that supports daily life with a sense of ease,
-            calm, and beauty—without excess.
+
+          <p className="leading-relaxed">
+            To create enduring furniture that supports daily life with a sense
+            of ease, clarity, and beauty — without excess. Every piece is
+            designed to last, both physically and emotionally.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="space-y-6 rounded-[2.2rem] border border-border bg-[#f3e7da] p-7">
+      {/* Craftsmanship */}
+      <motion.section
+        className="space-y-8 rounded-[2.2rem] border border-border bg-[#f3e7da]/80 backdrop-blur-sm p-7"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+      >
         <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
           Craftsmanship
         </p>
-        <div className="grid gap-6 md:grid-cols-3">
-          <div className="space-y-2 text-sm text-muted-foreground">
+
+        <div className="grid gap-8 md:grid-cols-3">
+
+          {/* Materials */}
+          <div className="space-y-3 text-sm text-muted-foreground">
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-foreground">
               Materials
             </p>
-            <p>
-              We work with solid oak, walnut, marble, and performance fabrics chosen for
-              longevity—not trend.
+            <p className="leading-relaxed">
+              We work with carefully selected hardwoods, natural stone, and
+              premium finishes chosen for durability, texture, and timeless
+              appeal — not trend.
             </p>
           </div>
-          <div className="space-y-2 text-sm text-muted-foreground">
+
+          {/* Workshops */}
+          <div className="space-y-3 text-sm text-muted-foreground">
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-foreground">
               Workshops
             </p>
-            <p>
-              Each piece is produced in collaboration with family-owned workshops across
-              Europe, honoring generational expertise.
+            <p className="leading-relaxed">
+              Each piece is crafted in collaboration with skilled artisans and
+              local workshops, preserving generational knowledge and precision.
             </p>
           </div>
-          <div className="space-y-2 text-sm text-muted-foreground">
+
+          {/* Responsibility */}
+          <div className="space-y-3 text-sm text-muted-foreground">
             <p className="text-xs font-medium uppercase tracking-[0.25em] text-foreground">
               Responsibility
             </p>
-            <p>
-              Responsible sourcing, repairable construction, and timeless silhouettes
-              reduce the need for replacement.
+            <p className="leading-relaxed">
+              Thoughtful sourcing, repairable construction, and timeless design
+              reduce waste and extend the life of every piece we create.
             </p>
           </div>
+
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
-

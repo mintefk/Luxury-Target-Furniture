@@ -12,7 +12,6 @@ type Props = {
 
 export function ProductDetail({ product }: Props) {
   const { addToCart } = useCart();
-
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [showPhone, setShowPhone] = useState(false);
 
@@ -85,7 +84,7 @@ export function ProductDetail({ product }: Props) {
 
           {/* PRICE */}
           <p className="text-lg font-medium">
-            ${product.price.toLocaleString()}
+           
             <span className="ml-2 text-xs font-normal text-muted-foreground">
               Tax exclusive
             </span>

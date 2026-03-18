@@ -3,6 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Hero } from "@/components/hero";
+import Gallery from "@/components/gallery"; 
+
 import { ProductGrid } from "@/components/product-grid";
 import { products, categories } from "@/data/products";
 import { motion, AnimatePresence } from "framer-motion";
@@ -15,7 +17,7 @@ export default function HomePage() {
     {
       quote:
         "The Horizon table transformed our dining room. It's sculptural yet quiet, and the craftsmanship is exceptional.",
-      author: "Interior Studio, Copenhagen",
+      author: "private Client, Addis Ababa",
     },
     {
       quote:
@@ -67,6 +69,15 @@ export default function HomePage() {
       >
         <Hero />
       </motion.div>
+      <motion.section
+        variants={sectionReveal}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+        className="luxury-container space-y-10"
+      >
+       <Gallery products={products} />
+      </motion.section>
 
       {/* Featured Products */}
       <motion.section
@@ -153,72 +164,75 @@ export default function HomePage() {
 
       {/* Our Story */}
       <motion.section
-        initial={{ opacity: 0, y: 60 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1 }}
-        className="relative luxury-container overflow-hidden rounded-[2.5rem]"
-      >
-        <motion.div
-          initial={{ scale: 1.05 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.5 }}
-        >
-          <Image
-            src="/images/bed-1.jpg"
-            alt="Furniture craftsmanship"
-            fill
-            className="object-cover"
-          />
-        </motion.div>
+  initial={{ opacity: 0, y: 60 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 1 }}
+  className="relative luxury-container overflow-hidden rounded-[2.5rem]"
+>
+  {/* 🔥 Background Image Layer */}
+  <Image
+    src="/images/cabinet-2.jpg" // <-- your background image
+    alt="Background texture"
+    fill
+    className="object-cover "
+  />
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+  <motion.div
+    initial={{ scale: 1.05 }}
+    whileInView={{ scale: 1 }}
+    viewport={{ once: true, amount: 0.3 }}
+    transition={{ duration: 1.5 }}
+  >
+   
+  </motion.div>
 
-        <div className="relative grid gap-12 px-10 py-16 md:grid-cols-[1.3fr,1fr]">
-          <motion.div
-            initial={{ opacity: 0, x: -60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1 }}
-            className="max-w-xl space-y-6 text-white"
-          >
-            <p className="text-xs uppercase tracking-[0.35em] text-white/70">Our story</p>
-            <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-              Furniture that lives with you.
-            </h2>
-            <p className="text-sm leading-relaxed text-white/80">
-              Target Furniture was founded on the belief that everyday objects should
-              feel as considered as gallery pieces. Each design begins with proportion,
-              then material, then the small details—edge radius, stitching, and the
-              way light moves across a surface.
-            </p>
-            <p className="text-sm leading-relaxed text-white/70">
-              We collaborate with family-owned workshops across Europe using responsibly
-              sourced oak, walnut, marble, and linen. Every piece is finished by hand,
-              creating subtle variations that make each object uniquely yours.
-            </p>
-          </motion.div>
+  <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
 
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1 }}
-            className="rounded-[2rem] border border-white/10 bg-white/80 p-8 backdrop-blur-xl shadow-2xl hover:-translate-y-2 transition-transform duration-500"
-          >
-            <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">Craft</p>
-            <p className="mt-4 text-sm leading-relaxed text-neutral-700">
-              “We design for the quiet moments—a first coffee in the morning,
-              evening light drifting across a room. The pieces almost disappear,
-              but you feel them in the way you move through your space.”
-            </p>
-            <p className="mt-6 text-xs font-medium uppercase tracking-[0.3em] text-neutral-600">
-              Creative Director
-            </p>
-          </motion.div>
-        </div>
-      </motion.section>
+  <div className="relative grid gap-12 px-10 py-16 md:grid-cols-[1.3fr,1fr]">
+    <motion.div
+      initial={{ opacity: 0, x: -60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 1 }}
+      className="max-w-xl space-y-6 text-white"
+    >
+      <p className="text-xs uppercase tracking-[0.35em] text-white/70">Our story</p>
+      <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
+        Furniture that lives with you.
+      </h2>
+      <p className="text-sm leading-relaxed text-white/80">
+        Target Furniture was founded on the belief that everyday objects should
+        feel as considered as gallery pieces. Each design begins with proportion,
+        then material, then the small details—edge radius, stitching, and the
+        way light moves across a surface.
+      </p>
+      <p className="text-sm leading-relaxed text-white/70">
+        We collaborate with family-owned workshops across Europe using responsibly
+        sourced oak, walnut, marble, and linen. Every piece is finished by hand,
+        creating subtle variations that make each object uniquely yours.
+      </p>
+    </motion.div>
+
+    <motion.div
+      initial={{ opacity: 0, x: 60 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 1 }}
+      className="rounded-[2rem] border border-white/10 bg-white/80 p-8 backdrop-blur-xl shadow-2xl hover:-translate-y-2 transition-transform duration-500"
+    >
+      <p className="text-xs uppercase tracking-[0.35em] text-neutral-500">Craft</p>
+      <p className="mt-4 text-sm leading-relaxed text-neutral-700">
+        “We design for the quiet moments—a first coffee in the morning,
+        evening light drifting across a room. The pieces almost disappear,
+        but you feel them in the way you move through your space.”
+      </p>
+      <p className="mt-6 text-xs font-medium uppercase tracking-[0.3em] text-neutral-600">
+        Creative Director
+      </p>
+    </motion.div>
+  </div>
+</motion.section>
 
       {/* Testimonials & Location */}
       <motion.section
@@ -226,23 +240,21 @@ export default function HomePage() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1 }}
-        className="relative luxury-container overflow-hidden rounded-[2.5rem]"
-      >
-        <motion.div
-          initial={{ scale: 1.05 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.5 }}
-        >
-          <Image
-            src="/images/sofa-1.jpg"
-            alt="Luxury furniture interior"
-            fill
-            className="object-cover"
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" />
+        className="relative w-full luxury-container overflow-hidden rounded-[2.5rem]"
+      >  
+    
+  
+  <Image
+    src="/images/hero-bg.jpg" // Make sure this path exists in your public folder
+    alt="Background texture"
+    fill
+    className="object-cover w-full h-full"
+    priority
+  />
 
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-black/60" /> 
+      
+               
         <div className="relative grid gap-10 p-8 md:grid-cols-[1.2fr,1fr]">
           {/* Testimonials */}
           <motion.div
@@ -251,7 +263,7 @@ export default function HomePage() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1 }}
             className="space-y-6 rounded-[2.2rem] border border-white/10 bg-white/70 p-7 backdrop-blur-xl shadow-xl hover:-translate-y-2 transition-transform duration-500"
-          >
+          > 
             <p className="text-xs uppercase tracking-[0.3em] text-black-500">Testimonials</p>
             <AnimatePresence mode="wait">
               <motion.div

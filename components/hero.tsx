@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import HeroImage from "@/components/HeroImage";
+import MobileHeroSlider from "@/components/MobileHeroSlider";
 
 export function Hero() {
   return (
@@ -40,8 +41,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
           >
-            Target Furniture crafts timeless pieces in noble materials—oak,
-            marble, linen—designed to age beautifully and live at the center
+            Target Furniture crafts timeless pieces in noble materials. Designed to age beautifully and live at the center
             of everyday rituals.
           </motion.p>
 
@@ -92,54 +92,16 @@ export function Hero() {
             <HeroImage />
 
             {/* Mobile Images */}
+           {/* Mobile Images */}
             <div className="flex h-full flex-col md:hidden">
-              <div className="relative h-1/2 w-full overflow-hidden">
-                <Image
-                  src="/images/hero-mobile-top.jpg"
-                  alt="Target Furniture upholstery"
-                  fill
-                  priority
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="relative h-1/2 w-full overflow-hidden">
-                <Image
-                  src="/images/hero-mobile-bottom.jpg"
-                  alt="Target Furniture coffee table"
-                  fill
-                  priority
-                  sizes="100vw"
-                  className="object-cover"
-                />
-              </div>
-            </div>
+              {/* Mobile Slider */}
+               <MobileHeroSlider />
+             </div>
 
             {/* Light Overlay */}
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.75)_0,_transparent_55%)]" />
 
-            {/* Foreground Content */}
-            <div className="relative z-10 flex h-full items-end justify-between p-7">
-              <div>
-                <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-                  Featured
-                </p>
-
-                <p className="mt-1 text-lg font-medium text-foreground">
-                  Aurora Linen Sofa
-                </p>
-
-                <p className="mt-1 text-xs text-muted-foreground">
-                  From $4,890 — in dove & sand.
-                </p>
-              </div>
-
-              <div className="flex flex-col items-end gap-2 text-right text-[0.7rem] uppercase tracking-[0.24em] text-muted-foreground">
-                <span>New season palette</span>
-                <span>Ships in 4–6 weeks</span>
-              </div>
-            </div>
+           
           </div>
         </motion.div>
 
