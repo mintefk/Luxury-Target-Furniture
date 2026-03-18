@@ -84,54 +84,67 @@ export default function AboutPage() {
 
       {/* Craftsmanship */}
       <motion.section
-        className="space-y-8 rounded-[2.2rem] border border-border bg-[#f3e7da]/80 backdrop-blur-sm p-7"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        viewport={{ once: true }}
-      >
-        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          Craftsmanship
+  className="relative rounded-[2rem] border border-border overflow-hidden p-6 text-white h-[350px] md:h-[400px]"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7 }}
+  viewport={{ once: true }}
+>
+  {/* Background Image with subtle vertical motion */}
+  <motion.div
+    className="absolute inset-0 z-0 w-full h-full opacity-80"
+    style={{
+
+      backgroundImage: "url('/images/sofa-2.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+    }}
+    animate={{ y: ["-5px", "5px", "-5px"] }} // smaller motion for compact section
+    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+  />
+
+  {/* Transparent overlay for readability */}
+  <div className="absolute inset-0 z-0 bg-black/35" />
+
+  {/* Content */}
+  <div className="relative z-10 space-y-6 h-full flex flex-col justify-center">
+    <p className="text-xs uppercase tracking-[0.3em] font-semibold text-white/90">
+      Craftsmanship
+    </p>
+
+    <div className="grid gap-6 md:grid-cols-3 mt-2 text-sm text-white/90">
+      {/* Materials */}
+      <div className="space-y-1">
+        <p className="text-xs font-medium uppercase tracking-[0.25em] text-white">
+          Materials
         </p>
+        <p className="leading-relaxed text-white/80">
+          Carefully selected hardwoods, natural stone, and premium finishes chosen for durability, texture, and timeless appeal.
+        </p>
+      </div>
 
-        <div className="grid gap-8 md:grid-cols-3">
+      {/* Workshops */}
+      <div className="space-y-1">
+        <p className="text-xs font-medium uppercase tracking-[0.25em] text-white">
+          Workshops
+        </p>
+        <p className="leading-relaxed text-white/80">
+          Each piece is crafted in collaboration with skilled artisans and local workshops, preserving generational knowledge.
+        </p>
+      </div>
 
-          {/* Materials */}
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <p className="text-xs font-medium uppercase tracking-[0.25em] text-foreground">
-              Materials
-            </p>
-            <p className="leading-relaxed">
-              We work with carefully selected hardwoods, natural stone, and
-              premium finishes chosen for durability, texture, and timeless
-              appeal — not trend.
-            </p>
-          </div>
-
-          {/* Workshops */}
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <p className="text-xs font-medium uppercase tracking-[0.25em] text-foreground">
-              Workshops
-            </p>
-            <p className="leading-relaxed">
-              Each piece is crafted in collaboration with skilled artisans and
-              local workshops, preserving generational knowledge and precision.
-            </p>
-          </div>
-
-          {/* Responsibility */}
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <p className="text-xs font-medium uppercase tracking-[0.25em] text-foreground">
-              Responsibility
-            </p>
-            <p className="leading-relaxed">
-              Thoughtful sourcing, repairable construction, and timeless design
-              reduce waste and extend the life of every piece we create.
-            </p>
-          </div>
-
-        </div>
-      </motion.section>
+      {/* Responsibility */}
+      <div className="space-y-1">
+        <p className="text-xs font-medium uppercase tracking-[0.25em] text-white">
+          Responsibility
+        </p>
+        <p className="leading-relaxed text-white/80">
+          Thoughtful sourcing, repairable construction, and timeless design reduce waste and extend the life of every piece.
+        </p>
+      </div>
+    </div>
+  </div>
+</motion.section>
     </div>
   );
 }
