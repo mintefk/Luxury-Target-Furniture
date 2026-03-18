@@ -21,9 +21,8 @@ export function CartDrawer() {
     `Hello! I want to order:\n` +
       items.map(
         (item) =>
-          `- ${item.product.name} x${item.quantity} ($${item.product.price})`
-      ).join("\n") +
-      `\nSubtotal: $${subtotal.toLocaleString()} + Shipping: $${shippingEstimate.toLocaleString()}`
+          `- ${item.product.name} x${item.quantity}`
+      ).join("\n")
   );
 
   const handleCheckout = () => {
@@ -138,9 +137,9 @@ export function CartDrawer() {
                                     +
                                   </button>
                                 </div>
-                                <p className="text-sm font-medium">
-                                  ${(item.product.price * item.quantity).toLocaleString()}
-                                </p>
+                                <p className="text-xs text-muted-foreground">
+                                    Quantity: {item.quantity}
+                                 </p>
                               </div>
                             </div>
                           </li>
