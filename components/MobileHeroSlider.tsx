@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const images = [
     
     "/images/hero-desktop-2.jpg",
-    "/images/hero-desktop.jpg",
+    "/images/chair-2.jpg",
 ];
 
 export default function MobileHeroSlider() {
