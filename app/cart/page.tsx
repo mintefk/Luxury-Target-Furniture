@@ -18,7 +18,7 @@ export default function CartPage() {
     `Hello! I want to order:\n` +
       items.map(
         (item) =>
-          `- ${item.product.name} x${item.quantity} ($${item.product.price})`
+          `- ${item.product.name} x${item.quantity} )`
       ).join("\n") +
       `\nSubtotal: $${subtotal.toLocaleString()} + Shipping: $${shippingEstimate.toLocaleString()}`
   );
@@ -114,7 +114,7 @@ export default function CartPage() {
                           </button>
                         </div>
                         <p className="font-medium">
-                          ${(item.product.price * item.quantity).toLocaleString()}
+                         
                         </p>
                       </div>
                     </div>
